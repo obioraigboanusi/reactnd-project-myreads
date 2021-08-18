@@ -2,7 +2,7 @@
 
 MyReads is a React Application that help users manage their books. The application has a home screen, search screan and 404 page
 
-The home screen has three shelves: want to read, currently reading and read. Each shelve has list of books that share the same category.
+The home screen has three shelves: want to read, currently reading and read. Each shelf has list of books that share the same category.
 
 Users are able to add new books to a particular shelf, moovebooks from one shelf to another, remove books entirely from a shelf.
 
