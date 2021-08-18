@@ -14,19 +14,41 @@ export default class SearchScreen extends Component {
     const { value } = e.target;
 
     this.setState(() => ({
-      query: value.trim().toLowerCase(),
+      query: value,
     }));
 
-    BooksApi.search(value).then((res) => {
-      this.setState({
-        filteredBooks: Array.isArray(res) ? res : [],
+    if (!!value.trim) {
+      BooksApi.search(value).then((res) => {
+        const arr = Array.isArray(res) ? this.assignShelves(res) : [];
+        this.setState({
+          filteredBooks: arr,
+        });
       });
-    });
+    }
+    if (value === "") {
+      this.setState(() => ({
+        filteredBooks: [],
+      }));
+    }
   }
-
+  assignShelves(res) {
+    const checkedBooks = [];
+    res.map((item) => {
+      const found = this.props.books.filter((book) => book.id === item.id);
+      if (found.length !== 0) {
+        // console.log("found it", item.title);
+        item.shelf = found[0].shelf;
+        checkedBooks.push(item);
+      } else {
+        item.shelf = "none";
+        checkedBooks.push(item);
+      }
+    });
+    return checkedBooks;
+  }
   render() {
     const { query, filteredBooks } = this.state;
-    const { handleBookUpdate } = this.props;
+    const {handleBookUpdate } = this.props;
 
     return (
       <div className="search-books">

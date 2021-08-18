@@ -1,10 +1,11 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import * as BooksAPI from './BooksAPI'
 import "./App.css";
 import HomeScreen from "./screens/HomeScreen";
 import SearchScreen from "./screens/SearchScreen";
 import * as BooksApi from "./BooksAPI";
+import FourZeroFour from "./screens/FourZeroFour";
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <BrowserRouter>
+        <Switch>
           <Route
             exact
             path="/"
@@ -71,6 +73,8 @@ class BooksApp extends React.Component {
               />
             )}
           />
+          <Route exact render={() => <FourZeroFour />} />
+          </Switch>
         </BrowserRouter>
       </div>
     );
